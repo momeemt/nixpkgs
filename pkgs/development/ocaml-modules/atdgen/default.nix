@@ -6,6 +6,7 @@
   atdgen-runtime,
   re,
   python3,
+  biniou,
 }:
 
 buildDunePackage {
@@ -25,6 +26,7 @@ buildDunePackage {
   nativeCheckInputs = [
     atd
     (python3.withPackages (ps: [ ps.jsonschema ]))
+    biniou
   ];
   checkInputs = [
     alcotest
