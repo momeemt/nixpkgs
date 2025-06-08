@@ -5,19 +5,18 @@
   fetchFromGitHub,
   ctypes,
   libcxx,
+  dune-configurator,
 }:
 
 buildDunePackage rec {
   pname = "eigen";
-  version = "0.2.0";
-
-  useDune2 = true;
+  version = "0.3.3";
 
   src = fetchFromGitHub {
     owner = "owlbarn";
     repo = pname;
     rev = version;
-    sha256 = "1zaw03as14hyvfpyj6bjrfbcxp2ljdbqcqqgm53kms244mig425f";
+    sha256 = "sha256-8V4DQ+b2rzy58NTenK1BsJEJiJKYV6hIp2fJWqczHRY=";
   };
 
   minimalOCamlVersion = "4.02";
@@ -25,6 +24,8 @@ buildDunePackage rec {
   env.NIX_CFLAGS_COMPILE = lib.optionalString stdenv.hostPlatform.isDarwin "-I${lib.getDev libcxx}/include/c++/v1";
 
   propagatedBuildInputs = [ ctypes ];
+
+  buildInputs = [ dune-configurator ];
 
   meta = with lib; {
     inherit (src.meta) homepage;
